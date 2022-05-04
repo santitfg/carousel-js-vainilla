@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Hola
+    <div class="root"></div>
+    <script type="module">
+      //version de array y futuramente de json
+      import { carousel } from "./carousel.js";
+
+      const lista = [
+        "./imgs/frames.png",
+        "./imgs/retina.jpg",
+        "./imgs/sincos.gif",
+        "./imgs/tenor.gif",
+      ];
+      carousel(".root", ...lista);
+    </script>
+    <style>
+      * {
+        background-color: #ccc;
+      }
+    </style>
+    <link rel="stylesheet" href="carousel.css" />
+  </body>
+</html>
