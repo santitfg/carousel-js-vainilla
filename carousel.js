@@ -46,6 +46,12 @@ y minimizarlas solamente llamando al componente padre extrasyendo los elementos 
       actualizarImgByID("img-right", imgPaths[pointers[2]]);
       timeRunning = false;
     }, 2000);
+    // chageImg = setTimeout(() => {
+    //   actualizarImgByID("img-left", imgPaths[pointers[0]]);
+    //   // actualizarImgByID("img-center", imgPaths[pointers[1]]);
+    //   actualizarImgByID("img-right", imgPaths[pointers[2]]);
+    //   timeRunning = false;
+    // }, 2000);
   };
   //tres pointers, para la izquierda centro y derecha;
   const funcionBtn = (e) => {
