@@ -1,10 +1,13 @@
 const carousel = (insertIn, ...imgPaths) => {
   const insert = document.querySelector(insertIn);
   const divWrarpper = document.createElement("div");
-  // const divCarousel = document.createElement("carousel");
+  const divCarousel = document.createElement("carousel");
   divWrarpper.classList.add("carousel-wrapers");
+  divCarousel.classList.add("carousel-container");
+
   const DivBtnR = document.createElement("div");
   const DivBtnL = document.createElement("div");
+
   DivBtnR.innerHTML = "»";
   DivBtnR.setAttribute("id", "myBtnR");
   DivBtnR.classList.add("btn-carousel");
@@ -80,7 +83,7 @@ const carousel = (insertIn, ...imgPaths) => {
 
     cambioImgCentro = setTimeout(() => {
       actualizarImgByID("img-center", imgPaths[punteros[1]]);
-    }, 20000);
+    }, 200);
   };
   // creacion de los elementos de carrusel
   DivBtnR.addEventListener("click", funcionBtn);
@@ -97,10 +100,10 @@ const carousel = (insertIn, ...imgPaths) => {
     img.classList.add("image");
     div.appendChild(img);
     // divCarousel.appendChild(div);
-    divWrarpper.appendChild(div);
+    divCarousel.appendChild(div);
   });
 
-  // divWrarpper.appendChild(divCarousel);
+  divWrarpper.appendChild(divCarousel);
 
   divWrarpper.appendChild(DivBtnR);
   divWrarpper.appendChild(DivBtnL);
