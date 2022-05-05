@@ -1,102 +1,109 @@
 const carousel = (insertIn, ...imgPaths) => {
+  /*
+cambios a seguir, modificar los ids por clases y que la funcion carousel reciba el id de su padre
+limpiar las multiples llamadas al dom 
+y minimizarlas solamente llamando al componente padre extrasyendo los elementos con clases desde la funcion btn
+*/
+
   const insert = document.querySelector(insertIn);
   const divWrarpper = document.createElement("div");
   const divCarousel = document.createElement("carousel");
-  divWrarpper.classList.add("carousel-wrapers");
+  divWrarpper.classList.add("carousel-wrapper");
   divCarousel.classList.add("carousel-container");
 
-  const DivBtnR = document.createElement("div");
-  const DivBtnL = document.createElement("div");
+  const divBtnR = document.createElement("div");
+  const divBtnL = document.createElement("div");
 
-  DivBtnR.innerHTML = "»";
-  DivBtnR.setAttribute("id", "myBtnR");
-  DivBtnR.classList.add("btn-carousel");
-  DivBtnR.setAttribute("type", "button");
-  DivBtnL.innerHTML = "«";
-  DivBtnL.setAttribute("id", "myBtnL");
-  DivBtnL.classList.add("btn-carousel");
-  DivBtnL.setAttribute("type", "button");
+  divBtnR.innerHTML = "»";
+  divBtnR.setAttribute("id", "myBtnR");
+  divBtnR.classList.add("btn-carousel");
+  divBtnR.setAttribute("type", "button");
+  divBtnL.innerHTML = "«";
+  divBtnL.setAttribute("id", "myBtnL");
+  divBtnL.classList.add("btn-carousel");
+  divBtnL.setAttribute("type", "button");
 
   const listaIdsImg = ["img-left", "img-center", "img-right"];
 
-  var punteros = [imgPaths.length - 1, 0, 1];
+  var pointers = [imgPaths.length - 1, 0, 1];
   var direccion = null;
-  var cambioImgCentro = null;
+  var timeRunning = null;
+  var chageImg = null;
+
   const actualizarImgByID = (id, img_) => {
+    //quizas directamente utilizar una referencia global y pasarla a la func
     const imageRef = document.getElementById(id);
     imageRef.setAttribute("src", img_);
     imageRef.setAttribute("alt", img_);
     // imageRef.style.transform = "translate(100px)";
   };
 
-  //tres punteros, para la izquierda centro y derecha;
+  const delayChangeImg = () => {
+    timeRunning = true;
+    chageImg = setTimeout(() => {
+      actualizarImgByID("img-left", imgPaths[pointers[0]]);
+      actualizarImgByID("img-center", imgPaths[pointers[1]]);
+      actualizarImgByID("img-right", imgPaths[pointers[2]]);
+      timeRunning = false;
+    }, 2000);
+  };
+  //tres pointers, para la izquierda centro y derecha;
   const funcionBtn = (e) => {
     e.target.prevent;
-    // console.log(e.target.id);
-    // console.log(punteros);
-    //Generar una transicion de opacidad desplazamiento y luego cambio?
-    // [ a b c d e ] (0 1 2)[b,c,d]  | (1 2 3)[b to c, c to d , d to e]
-    // o pensar en 0 1 2 abc => 120 bcd img actual derecha e izq y solo necesito 2 img pero 3 precargadas?
+    if (timeRunning) {
+      clearTimeout(chageImg);
+      //esto cambiarlo por una clase, asi si obtengo un wrarper desde id, todas las clase
+      //var targetDiv = document.getElementById("foo").getElementsByClassName("bar");
+      actualizarImgByID("img-left", imgPaths[pointers[0]]);
+      actualizarImgByID("img-center", imgPaths[pointers[1]]);
+      actualizarImgByID("img-right", imgPaths[pointers[2]]);
+    }
 
     if (e.target.id === "myBtnL") {
       console.log("izq");
       direccion = false;
-      punteros.forEach((e, i) => {
-        punteros[i] -= 1;
+      pointers.forEach((e, i) => {
+        pointers[i] -= 1;
       });
     }
     if (e.target.id === "myBtnR") {
       console.log("der");
       direccion = true;
-      punteros.forEach((e, i) => {
-        punteros[i] += 1;
+      pointers.forEach((e, i) => {
+        pointers[i] += 1;
       });
     }
 
     //puesta en bucle la lista
-    punteros.forEach((e, i) => {
-      if (e > imgPaths.length - 1) punteros[i] = 0;
-      if (e < 0) punteros[i] = imgPaths.length - 1;
+    pointers.forEach((e, i) => {
+      if (e > imgPaths.length - 1) pointers[i] = 0;
+      if (e < 0) pointers[i] = imgPaths.length - 1;
     });
 
     listaIdsImg.map((id, index) => {
-      /*  if (direccion) {
-        if (index < 2) {
-          document.getElementById(id).style.transform = "translate(100px)";
-          // document.getElementById(id).style.opacity = "100";
-        }
+      const image = document.getElementById(id);
+      image.classList.remove("to-right", "to-left");
+      void image.offsetWidth;
+      if (direccion) {
+        image.classList.add("to-left");
       } else {
-        if (index > 0) {
-          document.getElementById(id).style.transform = "translate(-100px)";
-          // document.getElementById(id).style.opacity = "100";
-        }
+        image.classList.add("to-right");
       }
-       */
-      // if (index == 1) document.getElementById(id).style.opacity = "0";
-      if (index !== 1) {
-        actualizarImgByID(id, imgPaths[punteros[index]]);
-      } // if (direccion)
-      //   document.getElementById(id).style.transform = "translate(100px)";
-      // else document.getElementById(id).style.transform = "translate(-100px)";
     });
-    clearTimeout(cambioImgCentro);
-
-    cambioImgCentro = setTimeout(() => {
-      actualizarImgByID("img-center", imgPaths[punteros[1]]);
-    }, 200);
+    //funcion para seteo de las imgs luego de la animacion
+    delayChangeImg();
   };
-  // creacion de los elementos de carrusel
-  DivBtnR.addEventListener("click", funcionBtn);
-  DivBtnL.addEventListener("click", funcionBtn);
 
-  // divWrarpper.style.transform = "translate(100px)";
+  // creacion de los elementos de carrusel
+  divBtnR.addEventListener("click", funcionBtn);
+  divBtnL.addEventListener("click", funcionBtn);
 
   listaIdsImg.map((id, index) => {
     const div = document.createElement("div");
     const img = document.createElement("img");
     img.setAttribute("id", id);
-    img.setAttribute("src", imgPaths[punteros[index]]);
-    img.setAttribute("alt", imgPaths[punteros[index]]);
+    img.setAttribute("src", imgPaths[pointers[index]]);
+    img.setAttribute("alt", imgPaths[pointers[index]]);
     img.classList.add("image");
     div.appendChild(img);
     // divCarousel.appendChild(div);
@@ -105,8 +112,8 @@ const carousel = (insertIn, ...imgPaths) => {
 
   divWrarpper.appendChild(divCarousel);
 
-  divWrarpper.appendChild(DivBtnR);
-  divWrarpper.appendChild(DivBtnL);
+  divWrarpper.appendChild(divBtnR);
+  divWrarpper.appendChild(divBtnL);
   insert.appendChild(divWrarpper);
 };
 

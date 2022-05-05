@@ -1,41 +1,30 @@
-/* Realizar una animacion mas completa? se deszcplaza , desaparece y vuelve a su lugar? */
-
-.image {
-  z-index: 10;
-  width: 500px;
-  height: 275px;
-  /* transform: translate(100px); */
-  transition: transform 2s, opacity 2s;
-  opacity: 100;
-}
-.btn-carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* width: 50px; */
-  height: 275px;
-  z-index: 100;
-  position: absolute;
-  font-size: 100px;
-  background-color: rgba(88, 88, 88, 0.082);
-  /* margin: 0px;
-  padding: 50 px; */
-  font-size: 100px;
-
-  transition: color 2s;
-  cursor: pointer;
-  user-select: none;
-  /* transition: width 2.5s;
-    transition: background-color 1s; */
-}
 #myBtnR {
-  /* right: 0px; */
   left: 450px;
   top: 0px;
 }
 #myBtnL {
   left: 0px;
   top: 0px;
+}
+
+.image {
+  width: 500px;
+  height: 275px;
+}
+
+.btn-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 275px;
+  /* z-index: 100; */
+  position: absolute;
+  font-size: 100px;
+  background-color: rgba(88, 88, 88, 0.082);
+
+  transition: color 2s;
+  cursor: pointer;
+  user-select: none;
 }
 
 .btn-carousel:hover {
@@ -46,12 +35,36 @@
   transform: translate(-500px);
   display: flex;
 }
-.carousel-wrapers {
+.carousel-wrapper {
   padding: 0;
   margin: 0;
   position: relative;
-  /* display: flex; */
   overflow: hidden;
   width: 500px;
   height: 275px;
+}
+.to-left {
+  animation: imgtoleft 2s;
+}
+.to-right {
+  animation: imgtoright 2s;
+}
+
+/* esto se puede vovler parametrico ? */
+@keyframes imgtoright {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(500px);
+  }
+}
+
+@keyframes imgtoleft {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(-500px);
+  }
 }

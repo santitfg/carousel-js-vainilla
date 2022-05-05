@@ -8,15 +8,16 @@
   </head>
   <body>
     Hola
-    <h2>y generar la animacion</h2>
+    <h2>generar la animacion</h2>
     <h3>buscar alternativa para utilizar uuid, al agregar dos carruseles solo el primer id se modifica</h>
       <h2>gestionar la funciona para que reciba parametros</h2>
 
-    <div class="root"></div>
+    <div class="root" style="display:flex;"></div>
+
     <script type="module">
       //version de array y futuramente de json
       import { carousel } from "./carousel.js";
-
+      
       const lista = [
         "./imgs/frames.png",
         "./imgs/retina.jpg",
@@ -24,7 +25,8 @@
         "./imgs/tenor.gif",
       ];
       carousel(".root", ...lista);
-    </script>
+      // carousel(".root", ...lista);
+      </script>
     <style>
       /* * {
         background-color: #ccc;
