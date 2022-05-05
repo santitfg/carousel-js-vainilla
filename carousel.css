@@ -15,6 +15,14 @@
 #img-right {
   z-index: 2;
 }
+/* 
+para generar un detalle de la img tengo que sacar la img deñ wrapper  hidder
+#img-center {
+  transition: 2s;
+}
+#img-center:hover {
+  transform: scale(1.7);
+} */
 .image {
   width: 1000px;
   height: 500px;

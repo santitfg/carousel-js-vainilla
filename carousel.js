@@ -85,17 +85,37 @@ y minimizarlas solamente llamando al componente padre extrasyendo los elementos 
       if (e > imgPaths.length - 1) pointers[i] = 0;
       if (e < 0) pointers[i] = imgPaths.length - 1;
     });
+    //creo que no hace falta este bucle simplemente por q con direccion y dos img se cumple la animacion
 
-    listaIdsImg.map((id, index) => {
-      const image = document.getElementById(id);
-      image.classList.remove("to-right", "to-left");
-      void image.offsetWidth;
-      if (direccion) {
-        image.classList.add("to-left");
-      } else {
-        image.classList.add("to-right");
-      }
-    });
+    // listaIdsImg.map((id, index) => {
+    //   const image = document.getElementById(id);
+    //   image.classList.remove("to-right", "to-left");
+    //   void image.offsetWidth;
+    //   if (direccion) {
+    //     image.classList.add("to-left");
+    //   } else {
+    //     image.classList.add("to-right");
+    //   }
+    // });
+    //esto hacerlo clase
+    const imageR = document.getElementById("img-right");
+    const imageL = document.getElementById("img-left");
+    const imageC = document.getElementById("img-center");
+
+    imageR.classList.remove("to-left");
+    imageC.classList.remove("to-right", "to-left");
+    imageL.classList.remove("to-right");
+    void imageR.offsetWidth;
+    void imageL.offsetWidth;
+    void imageC.offsetWidth;
+    if (direccion) {
+      imageC.classList.add("to-left");
+      imageR.classList.add("to-left");
+    } else {
+      imageC.classList.add("to-right");
+      imageL.classList.add("to-right");
+    }
+
     //funcion para seteo de las imgs luego de la animacion
     delayChangeImg();
   };
