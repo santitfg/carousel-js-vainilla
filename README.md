@@ -1,12 +1,14 @@
 # carousel-js-vainilla
 Pequeña practica de hacer un carrusel con html, css y js desde cero, sin utilizar librerias externas
 
+Centrado en una funcion que dadp un nodo y una lista de rutas de imagen, agrega divesos elementos anidados para la construccion del carrusel.
+la lista de rutas de imagenes es recorrida por tres punteros cargando solamente las imgenes a demanda, y disparando las animaciones para generar la ilusion segun el click de los botones.
+
 ## [video del funcionamiento](https://youtu.be/q9KHtd3egrs)
 ---
 
-<!--  utilice una funcion para cargar todos los elementos a un elemento padre a partir de una lista de rutas de imagenes.  
- genere un wrapper que escondia 2 imagenes de las 3 imagenes pre cargadas y permitia generar la ilusion 
- me base en un principio e generar un bucle con 3 punteros que vayan cargando las imagenes segun se necesiten -->
+PD: proximamente le agregare compatibilidad entre navegadores y cambiare el esquema de la funcion para que permita generar varias intancias en simultaneo
+
 
 ![carrousel](https://user-images.githubusercontent.com/88756407/166999065-645dbb8b-a1b7-4e94-b770-e194c018d7c1.jpg)
 ---
